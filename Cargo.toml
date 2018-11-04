@@ -1,0 +1,7 @@
+[package]
+name = "raytracer"
+version = "0.1.0"
+authors = ["John Omar <me@johnomar.com>"]
+
+[dependencies]
+byteorder = "1"
