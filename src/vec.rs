@@ -1,4 +1,6 @@
-#[derive(Debug)]
+use std::ops::*;
+
+#[derive(Debug, Copy, Clone)]
 pub struct Vec3(pub f32, pub f32, pub f32);
 
 impl Vec3 {
@@ -30,6 +32,28 @@ impl Vec3 {
     }
 }
 
+impl Mul<Vec3> for f32 {
+    type Output = Vec3;
+    fn mul(self, v: Vec3) -> Vec3 {
+        Vec3(self * v.0, self * v.1, self * v.2)
+    }
+}
+
+impl Mul<Vec3> for Vec3 {
+    type Output = Vec3;
+    fn mul(self, v: Vec3) -> Vec3 {
+        Vec3(self.0 * v.0, self.1 * v.1, self.2 * v.2)
+    }
+}
+
+impl Add for Vec3 {
+    type Output = Vec3;
+    fn add(self, other: Vec3) -> Vec3 {
+        Vec3(self.0 + other.0, self.1 + other.1, self.2 + other.2)
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
 pub struct Ray {
     pub origin: Vec3,
     pub direction: Vec3,
@@ -39,7 +63,7 @@ impl Ray {
     pub fn new(o: Vec3, d: Vec3) -> Ray {
         Ray {
             origin: o,
-            direction: o,
+            direction: d,
         }
     }
 
