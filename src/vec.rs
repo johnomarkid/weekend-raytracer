@@ -34,6 +34,10 @@ impl Vec3 {
     pub fn to_unit_vector(&self) -> Vec3 {
         *self / self.length()
     }
+
+    pub fn dot(&self, v2: &Vec3) -> f32 {
+        self.0 * v2.0 + self.1 * v2.1 + self.2 * v2.2
+    }
 }
 
 impl Mul<Vec3> for f32 {
@@ -54,6 +58,13 @@ impl Add<Vec3> for Vec3 {
     type Output = Vec3;
     fn add(self, other: Vec3) -> Vec3 {
         Vec3(self.0 + other.0, self.1 + other.1, self.2 + other.2)
+    }
+}
+
+impl Sub<Vec3> for Vec3 {
+    type Output = Vec3;
+    fn sub(self, other: Vec3) -> Vec3 {
+        Vec3(self.0 - other.0, self.1 - other.1, self.2 - other.2)
     }
 }
 
