@@ -4,31 +4,35 @@ use std::ops::*;
 pub struct Vec3(pub f32, pub f32, pub f32);
 
 impl Vec3 {
-    fn x(&self) -> f32 {
+    pub fn x(&self) -> f32 {
         self.0
     }
-    fn y(&self) -> f32 {
+    pub fn y(&self) -> f32 {
         self.1
     }
-    fn z(&self) -> f32 {
+    pub fn z(&self) -> f32 {
         self.2
     }
-    fn r(&self) -> f32 {
+    pub fn r(&self) -> f32 {
         self.0
     }
-    fn g(&self) -> f32 {
+    pub fn g(&self) -> f32 {
         self.1
     }
-    fn b(&self) -> f32 {
+    pub fn b(&self) -> f32 {
         self.2
     }
 
-    fn length(&self) -> f32 {
+    pub fn length(&self) -> f32 {
         self.squared_length().sqrt()
     }
 
-    fn squared_length(&self) -> f32 {
+    pub fn squared_length(&self) -> f32 {
         self.x() * self.x() + self.y() * self.y() + self.z() * self.z()
+    }
+
+    pub fn to_unit_vector(&self) -> Vec3 {
+        *self / self.length()
     }
 }
 
@@ -46,10 +50,17 @@ impl Mul<Vec3> for Vec3 {
     }
 }
 
-impl Add for Vec3 {
+impl Add<Vec3> for Vec3 {
     type Output = Vec3;
     fn add(self, other: Vec3) -> Vec3 {
         Vec3(self.0 + other.0, self.1 + other.1, self.2 + other.2)
+    }
+}
+
+impl Div<f32> for Vec3 {
+    type Output = Vec3;
+    fn div(self, r: f32) -> Vec3 {
+        (1.0 / r) * self
     }
 }
 
